@@ -13,8 +13,12 @@ io.on('connection', (socket) => {
     });
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
+        io.emit('chat message', msg);
     });
 });
+
+io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' }); // This will emit the event to all connected sockets
+
 
 http.listen(3000, () => {
     console.log('listening on http://localhost:3000');
